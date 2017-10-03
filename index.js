@@ -1,12 +1,13 @@
 const fs = require('fs');
 
-const input = fs.readFileSync('resources/SampleText.txt', 'utf8').toLowerCase();
+const input = fs.readFileSync('resources/SampleText.txt', 'utf8');
+const tlsRegex = /[A-Za-z](?=([A-Za-z]{2}))/g
 
-let counter = 0;
-for (let ix = 0; ix < input.length; ix++) {
-    if (input.charAt(ix) === 't' && input.charAt(ix + 1) === 'r' && input.charAt(ix + 2) === 'a') {
+let match, counter = 0;
+while ((match = tlsRegex.exec(input)) !== null) {
+    if (match[0].toLowerCase() + match[1].toLowerCase() === 'tra') {
         counter++;
     }
 }
 
-console.log(counter);
+console.log(`There are ${counter} instances of 'tra' in the text.`);
